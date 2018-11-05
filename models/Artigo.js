@@ -7,9 +7,13 @@ var id = mongoose.Types.ObjectId();
 
 //criando schema
 const ArtigoSchema = new Schema({
-    autor: {
+    user: {
         type: Schema.Types.ObjectId,
         ref: 'autores'
+    },
+    autor: {
+        type: String,
+        required: true
     },
     titulo: {
         type: String,

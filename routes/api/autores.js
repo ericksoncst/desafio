@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../../config/keys');
 const passport = require('passport');
+const mongoose = require('mongoose');
 
 //load validation
 const validateRegisterInput = require('../../validation/cadastro');
@@ -115,8 +116,7 @@ router.get('/', async (req, res) => {
 //@route http://localhost:5000/api/autores/atual
 //GET autor logado
 router.get('/atual', 
-passport.authenticate('jwt', 
-{ session: false}), 
+passport.authenticate('jwt', { session: false}), 
 (req, res) => {
     //res.json({msg: 'success'});
     res.json({
@@ -128,21 +128,22 @@ passport.authenticate('jwt',
 
 //@route http://localhost:5000/api/autores/:id
 //PUT atualizando autor
-router.put('/:id' , (req, res) => {
-    const id = req.params.id;
-    Autor.update(
-        { '_id': id },
-        { $set:  { 'nome': req.body.nome }},
-        (err, result) => {
-          if (err) {
-            res.status(500)
-            .json({ error: 'Não foi possivel atualizar autor'});
-          } else {
-            res.status(200)
-            .json(result);
-          }
-       }
-      );
+router.put('/:id',	(req, res) => {
+    if(mongoose.Types.ObjectId.isValid(req.params.id)){
+        Autor.findByIdAndUpdate(req.params.id, req.body, {new : true})
+            .then(autor => {
+                if (autor) {
+                    res.json(autor);
+                } else {
+                res.status(404).json({ msg: 'Nenhum autor encontrado' })
+                }
+        
+                autor.save().then(autor => res.json(autor))
+                .catch(err => res.status(404).json({ msg: 'Autor não encontrado' }));
+        });
+    }else{
+        res.status(404).json({ msg: 'Nenhum autor encontrado' });
+    }
 });
 
 
