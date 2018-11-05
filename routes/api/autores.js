@@ -113,17 +113,20 @@ router.get('/', async (req, res) => {
 	}
 });
 
-//@route http://localhost:5000/api/autores/atual
-//GET autor logado
-router.get('/atual', 
-passport.authenticate('jwt', { session: false}), 
-(req, res) => {
-    //res.json({msg: 'success'});
-    res.json({
-        id: req.user.id,
-        nome: req.user.nome,
-        email: req.user.email,
-    });
+//@route http://localhost:5000/api/autores/:id
+//GET consultar autor por id
+router.get('/:id', (req, res) => {
+    Autor.findById(req.params.id)
+      .then(autor => {
+        if (autor) {
+          res.json(autor);
+        } else {
+          res.status(404).json({ msg: 'Nenhum autor encontrado' })
+        }
+      })
+      .catch(err =>
+        res.status(404).json({ msg: 'Nenhum autor encontrado' })
+    );
 });
 
 //@route http://localhost:5000/api/autores/:id

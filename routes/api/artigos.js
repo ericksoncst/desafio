@@ -40,6 +40,22 @@ router.get('/', async (req, res) => {
 });
 
 //@route http://localhost:5000/api/artigos/:id
+//GET consultar artigo por id
+router.get('/:id', (req, res) => {
+    Artigo.findById(req.params.id)
+      .then(artigo => {
+        if (artigo) {
+          res.json(artigo);
+        } else {
+          res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+        }
+      })
+      .catch(err =>
+        res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+    );
+});
+
+//@route http://localhost:5000/api/artigos/:id
 //PUT atualizando artigo por id
 router.put('/:id',	(req, res) => {
     if(mongoose.Types.ObjectId.isValid(req.params.id)){
