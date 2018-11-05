@@ -2,12 +2,20 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 
+//load validation
+const validateRegisterInput = require('../../validation/cadastro');
 
  //load autor model
 const Autor = require('../../models/Autor');
 
-
 router.post('/cadastro' ,(req, res)=> {
+
+    const {errors, isValid} = validateRegisterInput(req.body);
+
+    if(!isValid){
+       return res.status(400).json(errors);
+    }
+
     Autor.findOne({ email : req.body.email })
     .then(autor => {
 
