@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 const autores = require('./routes/api/autores');
 
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use(passport.initialize());
+require('./config/passport.js')(passport);
 
 app.use('/api/autores', autores);
 
