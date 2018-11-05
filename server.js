@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
-//const autores = require('./routes/api/autores');
+const autores = require('./routes/api/autores');
 
 mongoose.connect('mongodb://localhost:27017/desafio_webedia', { useNewUrlParser: true })
 .then(() => console.log('MongoDB conectado'))
@@ -25,6 +25,9 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+
+app.use('/api/autores', autores);
 
 
 const port = process.env.PORT || 5000;
