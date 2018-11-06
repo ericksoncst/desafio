@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
+const redis = require('redis');
+const client = redis.createClient();
 
 const Artigo = require('../../models/Artigo');
 
@@ -14,7 +16,7 @@ router.post('/', passport.authenticate('jwt', { session: false}),
         subtitulo: req.body.subtitulo,
         conteudo: req.body.conteudo,
         autor: req.user.nome,
-        user:  req.user.id
+        id_user:  req.user.id
     });
     
     novoArtigo.save().then(artigo => res.json(artigo)
@@ -25,14 +27,26 @@ router.post('/', passport.authenticate('jwt', { session: false}),
 //@route http://localhost:5000/api/artigos
 //GET listando artigos/paginação
 router.get('/', async (req, res) => {
+    const { pagina, porPagina} = req.query;
+    const opcoes = {
+        page: parseInt(pagina, 10) || 1,
+        limit: parseInt(porPagina, 10) || 10,
+    }
+    const artigos = await Artigo.paginate({}, opcoes);
+
 	try{
-		const { pagina, porPagina} = req.query;
-		const opcoes = {
-			page: parseInt(pagina, 10) || 1,
-			limit: parseInt(porPagina, 10) || 10,
-		}
-		const artigos = await Artigo.paginate({}, opcoes);
-		return res.json(artigos);
+		client.get('artigos', (err, reply) => {
+            if(reply){
+                console.log('redis');
+                res.json(JSON.parse(reply));
+            }else{
+                console.log('db');
+                client.set('artigos', JSON.stringify(artigos));
+                client.expire('artigos', 20);
+                return res.json(artigos);
+            }
+        });
+		
 	} catch (err){
 		console.error(err);
 		return res.status(500).send(err);

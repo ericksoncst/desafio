@@ -14,6 +14,7 @@ router.post('/:id', passport.authenticate('jwt', { session: false }),
         .then(artigo => {
           const novoComentario = {
             texto: req.body.texto,
+            nome: req.user.nome,
             user: req.user.id
           };
   
