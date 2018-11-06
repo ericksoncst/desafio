@@ -29,6 +29,10 @@ const ArtigoSchema = new Schema({
     },
     comentarios: [
         {
+          user: {
+            type: Schema.Types.ObjectId,
+            ref: 'autores'
+          },
           texto: {
             type: String,
             required: true

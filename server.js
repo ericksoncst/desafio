@@ -5,6 +5,7 @@ const passport = require('passport');
 
 const autores = require('./routes/api/autores');
 const artigos = require('./routes/api/artigos');
+const comentarios = require('./routes/api/comentarios');
 
 mongoose.connect('mongodb://localhost:27017/desafio_webedia', { useNewUrlParser: true })
 .then(() => console.log('MongoDB conectado'))
@@ -33,6 +34,7 @@ require('./config/passport.js')(passport);
 
 app.use('/api/autores', autores);
 app.use('/api/artigos', artigos);
+app.use('/api/comentarios', comentarios);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server rodando na porta ${port}`));
