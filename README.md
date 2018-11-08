@@ -4,7 +4,7 @@
 ## Instruções para rodar a api
 
 
-Primeiramente,pegue o arquivo dump e restaure o banco:
+Primeiramente,pegue o arquivo dump/webedia e restaure o banco:
 
 ```
  mongorestore --verbose \path\dump
