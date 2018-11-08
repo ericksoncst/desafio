@@ -24,22 +24,39 @@ router.post('/:id', passport.authenticate('jwt', { session: false }),
         .catch(err => res.status(404).json({ msg: 'Nenhum artigo encontrado' }));
 });
 
-//@route http://localhost:5000/api/comentarios
-//GET listando comentarios/ opção de paginação
-router.get('/', async (req, res) => {
-	try{
-		const { pagina, porPagina} = req.query;
-		const opcoes = {
-			page: parseInt(pagina, 10) || 1,
-            limit: parseInt(porPagina, 10) || 10,
-            select:   'comentarios'
-		}
-		const comentarios = await Artigo.paginate({}, opcoes);
-		return res.json(comentarios);
-	} catch (err){
-		console.error(err);
-		return res.status(500).send(err);
-	}
+//@route http://localhost:5000/api/comentarios/:id
+//GET consultar artigo por id
+router.get('/:id', (req, res) => {
+  Artigo.findById(req.params.id)
+    .select('comentarios')
+    .then(artigo => {
+      if (artigo) {
+        res.json(artigo);
+      } else {
+        res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+      }
+    })
+    .catch(err =>
+      res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+  );
+});
+
+//@route http://localhost:5000/api/comentarios/:comentario_id
+//PUT atualizando comentario
+router.put('/:id' , (req, res) => {
+  Artigo.update(
+      { 'comentarios._id': req.params.id },
+      { $set:  { 'comentarios.$.texto': req.body.texto }},
+      (err, result) => {
+        if (err) {
+          res.status(500)
+          .json({ error: 'Não foi possivel atualizar comentario'});
+        } else {
+          res.status(200)
+          .json(result);
+        }
+     }
+    );
 });
 
 //@route http://localhost:5000/api/comentarios/:comentario_id
@@ -65,7 +82,7 @@ router.put('/:id' , (req, res) => {
 //@route http://localhost:5000/api/comentarios/:artigoId/:comentarioId
 //DELETE deletando comentarios
 router.delete(
-    '/:artigo_id/:comentario_id',
+    '/:id/:comentario_id',
     passport.authenticate('jwt', { session: false }),
     (req, res) => {
       Artigo.findById(req.params.id)
@@ -84,7 +101,7 @@ router.delete(
             .indexOf(req.params.comentario_id);
 
             artigo.comentarios.splice(removeIndex, 1);
-            artigo.save().then(artigo => res.json(artigo));
+            artigo.save().then(artigo => res.json({msg: 'Comentario excluido'}));
         })
         .catch(err => res.status(404).json({ msg: 'Nenhum artigo ou comentario encontrado' }));
     }

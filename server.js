@@ -7,7 +7,7 @@ const autores = require('./routes/api/autores');
 const artigos = require('./routes/api/artigos');
 const comentarios = require('./routes/api/comentarios');
 
-mongoose.connect('mongodb://localhost:27017/desafio_webedia', { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost:27017/webedia_desafio', { useNewUrlParser: true })
 .then(() => console.log('MongoDB conectado'))
     .catch(err => console.log(err));
 
