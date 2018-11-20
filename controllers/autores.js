@@ -2,7 +2,6 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
-const passport = require('passport');
 
 //load model 
 const Autor = require('../models/Autor');

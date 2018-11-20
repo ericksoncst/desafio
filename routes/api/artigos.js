@@ -2,9 +2,6 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-//load model
-const Artigo = require('../../models/Artigo');
-
 //load controller
 const artigoController = require('../../controllers/artigos');
 

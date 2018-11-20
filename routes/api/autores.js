@@ -4,9 +4,7 @@ const router = express.Router();
 //load controller
 const autoresController = require('../../controllers/autores')
 
- //load autor model
-const Autor = require('../../models/Autor');
-
+ 
 //@route http://localhost:5000/api/autores/cadastro
 //POST cadastro do autor
 router.post('/cadastro' ,autoresController.cadastro);
