@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const mongoosePaginate = require('mongoose-paginate');
-
-var id = mongoose.Types.ObjectId();
-
+const URLSlugs = require('mongoose-url-slugs');
 
 //criando schema
 const ArtigoSchema = new Schema({
@@ -58,5 +56,6 @@ ArtigoSchema.pre('save', function(next) {
     return next();
 });
 
+ArtigoSchema.plugin(URLSlugs('titulo', {field: 'permalink'}));
 ArtigoSchema.plugin(mongoosePaginate);
 module.exports = Artigo = mongoose.model('artigos', ArtigoSchema);

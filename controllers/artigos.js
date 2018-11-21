@@ -48,13 +48,27 @@ exports.lista_artigos = async (req, res) => {
 	}
 }
 
+exports.artigo_permalink = (req,res) => {
+
+    const permalink = req.params.permalink;
+    Artigo.find({permalink})
+    .then(url => {
+        if(url.length === 0) {
+            res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+        }else {
+            res.json(url);
+        }
+    }).catch(err =>
+        res.status(404).json(err));
+}
+
 exports.artigo_by_id = (req, res) => {
     Artigo.findById(req.params.id)
       .then(artigo => {
         if (artigo) {
           res.json(artigo);
         } else {
-          res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+          res.status(404).json({ msg: 'Nenhum artigo encontrado' });
         }
       })
       .catch(err =>

@@ -5,6 +5,9 @@ const passport = require('passport');
 //load controller
 const artigoController = require('../../controllers/artigos');
 
+//@route http://localhost:5000/api/artigos/per/:permalink
+//GET artigo por permalink 
+router.get('/per/:permalink', artigoController.artigo_permalink);
 
 //@route http://localhost:5000/api/artigos
 //POST novo artigo 
