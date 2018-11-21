@@ -56,6 +56,6 @@ ArtigoSchema.pre('save', function(next) {
     return next();
 });
 
-ArtigoSchema.plugin(URLSlugs('titulo', {field: 'permalink'}));
+ArtigoSchema.plugin(URLSlugs('_id titulo', {field: 'permalink'}));
 ArtigoSchema.plugin(mongoosePaginate);
 module.exports = Artigo = mongoose.model('artigos', ArtigoSchema);

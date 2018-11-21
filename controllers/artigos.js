@@ -54,7 +54,7 @@ exports.artigo_permalink = (req,res) => {
     Artigo.find({permalink})
     .then(url => {
         if(url.length === 0) {
-            res.status(404).json({ msg: 'Nenhum artigo encontrado' })
+            res.status(404).json({ msg: 'Link inválido' })
         }else {
             res.json(url);
         }
