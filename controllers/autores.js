@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
+const redis = require('redis');
+const client = redis.createClient();
 
 //load model 
 const Autor = require('../models/Autor');
@@ -90,14 +92,26 @@ exports.login = (req,res) => {
 }
 
 exports.lista_autores = async (req, res) => {
-	try{
-		const { pagina, porPagina} = req.query;
+
+    const { pagina, porPagina} = req.query;
 		const opcoes = {
 			page: parseInt(pagina, 10) || 1,
 			limit: parseInt(porPagina, 10) || 10,
-		}
-		const autores = await Autor.paginate({}, opcoes);
-		return res.json(autores);
+        }
+        const autores = await Autor.paginate({}, opcoes);
+
+	try{
+		client.get('autores', (err, reply) => {
+            if(reply){
+                console.log('redis');
+                res.json(JSON.parse(reply));
+            }else{
+                console.log('db');
+                client.set('autores', JSON.stringify(autores));
+                client.expire('autores', 20);
+                return res.json(autores);
+            }  
+        });  
 	} catch (err){
 		console.error(err);
 		return res.status(500).send(err);

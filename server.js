@@ -6,7 +6,7 @@ const passport = require('passport');
 const autores = require('./routes/api/autores');
 const artigos = require('./routes/api/artigos');
 const comentarios = require('./routes/api/comentarios');
-const mongoURL = 'mongodb://erickdb:password1@ds147391.mlab.com:47391/desafio';
+const mongoURL = 'mongodb://erickdb:password11@ds147391.mlab.com:47391/desafio';
 
 //mongoose.connect('mongodb://localhost:27017/webedia_desafio', { useNewUrlParser: true })
 mongoose.connect(mongoURL, { useNewUrlParser: true })
