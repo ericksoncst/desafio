@@ -24,7 +24,7 @@ exports.cadastro = async (req, res)=> {
     autor.senha = await bcrypt.hash(autor.senha, salt);
 
     await autor.save()
-    .then(autor => res.json(_.pick(autor, ['nome', 'email'])));
+    .then(autor => res.json(_.pick(autor, ['_id','nome', 'email'])));
 }
 
 exports.login = async (req, res) => {
@@ -92,8 +92,8 @@ exports.deleta_autor = async (req, res) => {
     if(verificaId(req.params.id) === false)
     return res.status(404).json({msg: 'Autor não encontrado.'});
 
-    // if (req.params.id != req.user.id) 
-    // return res.status(400).json({msg: 'Não autorizado.'});
+    if (req.params.id != req.user.id) 
+    return res.status(400).json({msg: 'Não autorizado.'});
 
     let autor = await Autor.findByIdAndDelete(req.params.id);
     if(!autor) return res.status(404).json({msg: 'Autor não encontrado.'});

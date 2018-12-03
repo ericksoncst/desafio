@@ -1,29 +1,16 @@
 const request = require('supertest');
 const Autor = require('../models/Autores');
 const mongoose = require('mongoose');
-let server;
+let server,token, _id;
+
 
 describe('/api/autores', () => {
 
-    beforeAll(async () => { server = require('../app'); 
-    _id = mongoose.Types.ObjectId("507f191e810c19729de860ea");
-    let autor = new  Autor(
-        {_id: _id, nome: 'Ericktest', senha: 'testes', email: 'teste_suit2@test.com'},
-    );
-    autor.save();
-    });
-
-    beforeEach(async () => { server = require('../app'); 
-    _id = mongoose.Types.ObjectId();
-    let autor = new  Autor(
-        {_id: _id, nome: 'Ericktest', senha: 'testes', email: 'teste_suit2@test.com'},
-    );
-    autor.save();
-});
+    beforeAll(async () => { server = require('../app'); });    
 
     afterAll(async () => { 
-      server.close(); 
-      await Autor.collection.drop();
+        server.close(); 
+        await Autor.collection.drop();
     });
 
 describe('POST /autores', function () {
@@ -34,19 +21,16 @@ describe('POST /autores', function () {
         "senha2": "testes"
     }
 
-    it('Deve retornar status 200,nome e email do autor.', function (done) {
+    it('Deve retornar status 200.', function (done) {
         request(server)
             .post('/api/autores/cadastro')
             .send(data)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .expect({
-                "nome": "TESTE",
-                "email": "suit_tests@suit.com"
-            })
-            .end((err) => {
+            .end((err,res) => {
                 if (err) return done(err);
+                _id = res.body._id;
                 done();
             });
     });
@@ -65,8 +49,9 @@ describe('POST /autores/login', function () {
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect(200)
-            .end((err) => {
+            .end((err,res) => {
                 if (err) return done(err);
+                token = res.body;
                 done();
             });
     });
@@ -111,25 +96,48 @@ describe('GET /autores', function () {
 
 describe('GET /autores/:id', function () {
     it('Deve retornar um Json com o Autor', function (done) {
+        const url = '/api/autores/' + _id;
         request(server)
-            .get('/api/autores/507f191e810c19729de860ea')
+            .get(url)
             .set('Accept', 'application/json')
             .expect('Content-Type', /json/)
             .expect({
-                "_id": "507f191e810c19729de860ea",
-                "nome": "Ericktest",
-                "email": "teste_suit2@test.com",
+                "_id": _id,
+                "nome": "TESTE",
+                "email": "suit_tests@suit.com",
             })
             .expect(200, done);
     });
 });
 
+describe('PUT /autores', function () {
+    let data = {
+        "email": "suit_tests@suit.com",
+        "senha": "testes88",
+    }
+
+    it('Deve retornar status 200', function (done) {
+        const url = '/api/autores/' + _id;
+        request(server)
+            .put(url)
+            .send(data)
+            .set('Accept', 'application/json')
+            .set('Authorization', `${token}`)
+            .expect(200)
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            });
+    });
+});
+
 describe('DELETE /autores/:id', function () {
     it('Deve retornar status 200 e mensagem de excluido com sucesso!', function (done) {
-        request(server)
-            .delete('/api/autores/507f191e810c19729de860ea')
+        const url = '/api/autores/' + _id;
+     request(server)
+            .delete(url)
             .set('Accept', 'application/json')
-            .expect('Content-Type', /json/)
+            .set('Authorization', `${token}`)
             .expect({
                 "success": true,
                 "msg": "Autor excluido com sucesso"
@@ -137,7 +145,6 @@ describe('DELETE /autores/:id', function () {
             .expect(200, done);
     });
 });
-
 
 
 });
