@@ -1,27 +1,22 @@
-const mongoose = require('mongoose');
 const redis = require('redis');
 const client = redis.createClient();
+const { verificaId } = require('../validation/objectId');
 
-//load model 
-const Artigo = require('../models/Artigo');
+const Artigo = require('../models/Artigos');
 
-
-exports.criar_artigo = 
-(req, res) => {   
+exports.criar_artigo = async (req, res) => {   
     const novoArtigo = new Artigo({
         titulo: req.body.titulo,
         subtitulo: req.body.subtitulo,
         conteudo: req.body.conteudo,
         autor: req.user.nome,
-        id_user:  req.user.id
+        user:  req.user.id
     });
     
-    novoArtigo.save().then(artigo => res.json(artigo)
-    .catch(err =>  console.log(err)));
-       
+    await novoArtigo.save().then(artigo => res.json(artigo)); 
 }
 
-exports.lista_artigos = async (req, res) => {
+exports.listar_artigos = async (req, res) => {
     const { pagina, porPagina} = req.query;
     const opcoes = {
         page: parseInt(pagina, 10) || 1,
@@ -29,76 +24,59 @@ exports.lista_artigos = async (req, res) => {
     }
     const artigos = await Artigo.paginate({}, opcoes);
 
-	try{
-		client.get('artigos', (err, reply) => {
-            if(reply){
-                console.log('redis');
-                res.json(JSON.parse(reply));
-            }else{
-                console.log('db');
-                client.set('artigos', JSON.stringify(artigos));
-                client.expire('artigos', 20);
-                return res.json(artigos);
-            }
-        });
-		
-	} catch (err){
-		console.error(err);
-		return res.status(500).send(err);
-	}
+    client.get('artigos', (err, reply) => {
+        if(reply){
+            console.log('redis');
+            res.json(JSON.parse(reply));
+        }else{
+            console.log('db');
+            client.set('artigos', JSON.stringify(artigos));
+            client.expire('artigos', 20);
+            return res.status(200).json(artigos);
+        }  
+    });  
 }
 
-exports.artigo_permalink = (req,res) => {
+exports.artigo_by_id = async (req, res) => {
+    if(verificaId(req.params.id) === false)
+    return res.status(404).json({msg: 'Artigo não encontrado.'});
+
+    let artigo = await Artigo.findById(req.params.id);
+    if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
+    res.json(artigo);
+}
+
+exports.atualiza_artigo = async (req, res) => {
+    if(verificaId(req.params.id) === false)
+    return res.status(404).json({msg: 'artigo não encontrado.'});
+
+    let check = await Artigo.findById(req.params.id);
+    if (check.user != req.user.id) return res.status(400).json({msg: 'Não autorizado.'});
+
+    let artigo = await Artigo.findByIdAndUpdate(req.params.id, req.body, {new : true});
+    if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
+     
+    res.json(artigo);
+}
+
+exports.deleta_artigo = async (req, res) => {
+    if(verificaId(req.params.id) === false || null)
+    return res.status(404).json({msg: 'Artigo não encontrado.'});
+
+    let artigo = await Artigo.findById(req.params.id);
+
+    if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
+    if (artigo.user != req.user.id) return res.status(400).json({msg: 'Não autorizado.'});
+    artigo.remove();
+
+    res.json({success: true, msg: "Artigo excluido com sucesso"});
+}
+
+exports.artigo_by_permalink = async (req,res) => {
 
     const permalink = req.params.permalink;
-    Artigo.find({permalink})
-    .then(url => {
-        if(url.length === 0) {
-            res.status(404).json({ msg: 'Link inválido' })
-        }else {
-            res.json(url);
-        }
-    }).catch(err =>
-        res.status(404).json(err));
-}
-
-exports.artigo_by_id = (req, res) => {
-    Artigo.findById(req.params.id)
-      .then(artigo => {
-        if (artigo) {
-          res.json(artigo);
-        } else {
-          res.status(404).json({ msg: 'Nenhum artigo encontrado' });
-        }
-      })
-      .catch(err =>
-        res.status(404).json({ msg: 'Nenhum artigo encontrado' })
-    );
-}
-
-exports.atualiza_artigo = (req, res) => {
-    if(mongoose.Types.ObjectId.isValid(req.params.id)){
-        Artigo.findByIdAndUpdate(req.params.id, req.body, {new : true})
-            .then(artigo => {
-                if (artigo) {
-                    res.json(artigo);
-                } else {
-                res.status(404).json({ msg: 'Nenhum artigo encontrado' })
-                }
-        
-                artigo.save().then(artigo => res.json(artigo))
-                .catch(err => res.status(404).json({ msg: 'Artigo não encontrado' }));
-        });
-    }else{
-        res.status(404).json({ msg: 'Nenhum artigo encontrado' });
-    }
-}
-
-exports.deleta_artigo = (req, res) => {
-    const id = req.params.id;
-    Artigo.findById({_id: id})
-    .then(artigo => {
-    artigo.remove().then(() => res.json({ msg: "Artigo excluido com sucesso" }));
-    })
-    .catch(err => res.status(404).json({ msg: 'Artigo não encontrado' }));
+    const artigo = await Artigo.find({permalink});
+    
+    if(artigo.length === 0) return res.status(404).json({msg: 'Artigo não encontrado.'});
+    res.json(artigo);
 }
