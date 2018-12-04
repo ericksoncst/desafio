@@ -13,7 +13,7 @@ describe('/api/autores', () => {
         await Autor.collection.drop();
     });
 
-describe('POST /autores', function () {
+describe('POST /autores/cadastro', function () {
     let data = {
         "nome": "TESTE",
         "email": "suit_tests@suit.com",
@@ -31,6 +31,28 @@ describe('POST /autores', function () {
             .end((err,res) => {
                 if (err) return done(err);
                 _id = res.body._id;
+                done();
+            });
+    });
+});
+
+describe('POST /autores/login', function () {
+    let data = {
+        "email": "suit_tests@suit.com",
+        "senha": "teste",
+    }
+
+    it('Deve retornar status 400 e mensagem de senha inválida', function (done) {
+        request(server)
+            .post('/api/autores/login')
+            .send(data)
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(400)
+            .expect({msg: 'Senha incorreta.'})
+            .end((err,res) => {
+                if (err) return done(err);
+                token = res.body;
                 done();
             });
     });
@@ -95,6 +117,16 @@ describe('GET /autores', function () {
 });
 
 describe('GET /autores/:id', function () {
+    it('Deve retornar status 404, id errado', function (done) {
+        request(server)
+            .get('/api/autores/98027889')
+            .set('Accept', 'application/json')
+            .expect('Content-Type', /json/)
+            .expect(404, done);
+    });
+});
+
+describe('GET /autores/:id', function () {
     it('Deve retornar um Json com o Autor', function (done) {
         const url = '/api/autores/' + _id;
         request(server)
@@ -107,6 +139,27 @@ describe('GET /autores/:id', function () {
                 "email": "suit_tests@suit.com",
             })
             .expect(200, done);
+    });
+});
+
+
+describe('PUT /autores', function () {
+    let data = {
+        "email": "suit_tests@suit.com",
+        "senha": "testes88",
+    }
+
+    it('Deve retornar status 401', function (done) {
+        request(server)
+            .put('/api/autores/8883938')
+            .send(data)
+            .set('Accept', 'application/json')
+            .expect(401)
+            .expect('Unauthorized')
+            .end((err) => {
+                if (err) return done(err);
+                done();
+            });
     });
 });
 
@@ -128,6 +181,16 @@ describe('PUT /autores', function () {
                 if (err) return done(err);
                 done();
             });
+    });
+});
+
+describe('DELETE /autores/:id', function () {
+    it('Deve retornar status 404 e mensagem de erro!', function (done) {
+     request(server)
+            .delete('/api/autores/89789')
+            .set('Accept', 'application/json')
+            .set('Authorization', `${token}`)
+            .expect(404, done);
     });
 });
 

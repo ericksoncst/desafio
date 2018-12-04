@@ -32,7 +32,7 @@ exports.listar_artigos = async (req, res) => {
             console.log('db');
             client.set('artigos', JSON.stringify(artigos));
             client.expire('artigos', 20);
-            return res.status(200).json(artigos);
+             return res.status(200).json(artigos);
         }  
     });  
 }
@@ -51,7 +51,7 @@ exports.atualiza_artigo = async (req, res) => {
     return res.status(404).json({msg: 'artigo não encontrado.'});
 
     let check = await Artigo.findById(req.params.id);
-    if (check.user != req.user.id) return res.status(400).json({msg: 'Não autorizado.'});
+    if (check.user != req.user.id) return res.status(401).json({msg: 'Não autorizado.'});
 
     let artigo = await Artigo.findByIdAndUpdate(req.params.id, req.body, {new : true});
     if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
@@ -66,7 +66,7 @@ exports.deleta_artigo = async (req, res) => {
     let artigo = await Artigo.findById(req.params.id);
 
     if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
-    if (artigo.user != req.user.id) return res.status(400).json({msg: 'Não autorizado.'});
+    if (artigo.user != req.user.id) return res.status(401).json({msg: 'Não autorizado.'});
     artigo.remove();
 
     res.json({success: true, msg: "Artigo excluido com sucesso"});

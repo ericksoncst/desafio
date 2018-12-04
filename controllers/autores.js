@@ -62,7 +62,7 @@ exports.lista_autores = async (req, res) => {
             client.expire('autores', 20);
             return res.status(200).json(autores);
         }  
-    });  
+   });  
 }
 
 exports.autor_by_id = async (req, res) => {
@@ -79,7 +79,7 @@ exports.atualiza_autor = async (req, res) => {
     return res.status(404).json({msg: 'Autor não encontrado.'});
 
     if (req.params.id != req.user.id) 
-    return res.status(400).json({msg: 'Não autorizado.'});
+    return res.status(401).json({msg: 'Não autorizado.'});
 
     let autor = await Autor.findByIdAndUpdate(req.params.id, req.body, 
     {new : true}).select('_id email nome');
@@ -93,7 +93,7 @@ exports.deleta_autor = async (req, res) => {
     return res.status(404).json({msg: 'Autor não encontrado.'});
 
     if (req.params.id != req.user.id) 
-    return res.status(400).json({msg: 'Não autorizado.'});
+    return res.status(401).json({msg: 'Não autorizado.'});
 
     let autor = await Autor.findByIdAndDelete(req.params.id);
     if(!autor) return res.status(404).json({msg: 'Autor não encontrado.'});

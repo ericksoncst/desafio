@@ -1688,3 +1688,18 @@
 {"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-03T20:28:09.944Z"}
 {"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-03T20:28:42.839Z"}
 {"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-03T20:28:43.905Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T00:51:47.518Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T02:51:55.270Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-04T02:51:56.303Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T02:52:24.775Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T02:52:25.892Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T03:32:32.644Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T03:32:33.753Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T03:34:55.792Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T03:34:56.852Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T03:38:14.795Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T03:38:15.941Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T03:40:28.175Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T03:40:29.233Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-04T03:42:16.815Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-04T03:42:17.926Z"}

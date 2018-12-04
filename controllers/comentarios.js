@@ -1,5 +1,3 @@
-const redis = require('redis');
-const client = redis.createClient();
 const { verificaId } = require('../validation/objectId');
 // const _ = require('lodash');
 
