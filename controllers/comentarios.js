@@ -34,6 +34,9 @@ exports.lista_comentarios_artigo = async (req, res) => {
 }
 
 exports.atualiza_comentario = (req, res) => {
+    if(verificaId(req.params.id) === false)
+    return res.status(404).json({msg: 'Comentario não encontrado.'});
+
     Artigo.update(
         { 'comentarios._id': req.params.id },
         { $set:  { 'comentarios.$.texto': req.body.texto }},
