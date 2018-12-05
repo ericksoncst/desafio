@@ -39,7 +39,7 @@ exports.login = async (req, res) => {
     if (!senhaValida) return res.status(400).json({msg: 'Senha incorreta.'});
 
     const payload = { id: user.id, nome: user.nome}
-    const token = jwt.sign(payload, config.get('jwtPrivateKey') , {expiresIn: '1y'});    
+    const token = jwt.sign(payload, config.get('jwtPrivateKey') , {expiresIn: '1h'});    
     res.json('Bearer ' + token);
 }
 
