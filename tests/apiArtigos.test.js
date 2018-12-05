@@ -1,7 +1,7 @@
 const request = require('supertest');
 const Autor = require('../models/Autores');
 const Artigo = require('../models/Artigos');
-let server,token, _id, id_artigo,id_artigo2, id_comentario;
+let server,token, id_artigo,id_artigo2, id_comentario,permalink;
 
 
 describe('Suit test api/artigos', () => {
@@ -26,7 +26,6 @@ describe('Suit test api/artigos', () => {
                 .expect(200)
                 .end((err,res) => {
                     if (err) return done(err);
-                    _id = res.body._id;
                     done();
                 });
         });
@@ -113,7 +112,7 @@ describe('Suit test api/artigos', () => {
             "conteudo": "conteudo teste",
         };
     
-        it('Deve retornar status 200', function (done) {
+        it('Deve retornar status 200 e json artigo', function (done) {
             request(server)
                 .post('/api/artigos')
                 .send(data)
@@ -145,6 +144,7 @@ describe('Suit test api/artigos', () => {
                 .end((err, res) => {
                     if (err) return done(err);
                     id_artigo2 =  res.body._id;
+                    permalink = res.body.permalink;
                     done();
                 });
         });
@@ -157,7 +157,7 @@ describe('Suit test api/artigos', () => {
             "conteudo": "",
         };
     
-        it('Deve retornar status 400', function (done) {
+        it('Deve retornar status 400 e json erro', function (done) {
             request(server)
                 .post('/api/artigos')
                 .send(data)
@@ -181,13 +181,24 @@ describe('Suit test api/artigos', () => {
         });
     });
 
+    describe('GET /artigos/permalink/:permalink', function () {
+        it('Deve retornar Json com permalink', function (done) {
+            let url = '/api/artigos/permalink/' + permalink;
+            request(server)
+                .get(url)
+                .set('Accept', 'application/json')
+                .expect('Content-Type', /json/)
+                .expect(200, done);
+        });
+    });
+
     describe('PUT /artigos/:id', function () {
         let data = {
             "titulo": "Titulo teste modificado",
             "subtitulo": "sub teste modificado",
         };
 
-        it('Deve retornar status 200', function (done) {
+        it('Deve retornar status 200 e msg sucesso', function (done) {
             let url = '/api/artigos/' + id_artigo;
             request(server)
                 .put(url)
@@ -202,7 +213,7 @@ describe('Suit test api/artigos', () => {
     });
 
     describe('DELETE /artigos/:id', function () {
-        it('Deve retornar status 200!', function (done) {
+        it('Deve retornar status 200 e msg sucesso', function (done) {
             let url = '/api/artigos/' + id_artigo;
         request(server)
                 .delete(url)
@@ -212,7 +223,7 @@ describe('Suit test api/artigos', () => {
     });
 
     describe('DELETE /artigos/:id', function () {
-        it('Deve retornar status 404!', function (done) {
+        it('Deve retornar status 404, id inválido/nao encontrado', function (done) {
             let url = '/api/artigos/' + 8889909;
         request(server)
                 .delete(url)

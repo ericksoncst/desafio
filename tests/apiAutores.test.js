@@ -23,7 +23,7 @@ describe('Suit test api/autores', () => {
             "senha2": "testes"
         }
 
-        it('Deve retornar status 200.', function (done) {
+        it('Deve retornar status 200 e msg sucesso.', function (done) {
             request(server)
                 .post('/api/autores/cadastro')
                 .send(data)
@@ -119,7 +119,7 @@ describe('Suit test api/autores', () => {
     });
 
     describe('GET /autores/:id', function () {
-        it('Deve retornar status 404, id errado', function (done) {
+        it('Deve retornar status 404, id inválido', function (done) {
             request(server)
                 .get('/api/autores/98027889')
                 .set('Accept', 'application/json')
@@ -151,7 +151,7 @@ describe('Suit test api/autores', () => {
             "senha": "testes88",
         }
 
-        it('Deve retornar status 404', function (done) {
+        it('Deve retornar status 404 id inválido', function (done) {
             request(server)
                 .put('/api/autores/8883938')
                 .send(data)
