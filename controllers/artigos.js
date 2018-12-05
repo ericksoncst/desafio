@@ -3,6 +3,8 @@ const client = redis.createClient();
 const { verificaId } = require('../validation/objectId');
 
 const Artigo = require('../models/Artigos');
+const validaInputArtigo = require('../validation/artigo');
+
 
 exports.criar_artigo = async (req, res) => {   
     const novoArtigo = new Artigo({
@@ -12,6 +14,9 @@ exports.criar_artigo = async (req, res) => {
         autor: req.user.nome,
         user:  req.user.id
     });
+
+    const {errors, isValid} = validaInputArtigo(req.body);
+    if(!isValid) return res.status(400).json(errors);
     
     await novoArtigo.save().then(artigo => res.json(artigo)); 
 }
@@ -50,9 +55,6 @@ exports.atualiza_artigo = async (req, res) => {
     if(verificaId(req.params.id) === false)
     return res.status(404).json({msg: 'artigo não encontrado.'});
 
-    let check = await Artigo.findById(req.params.id);
-    if (check.user != req.user.id) return res.status(401).json({msg: 'Não autorizado.'});
-
     let artigo = await Artigo.findByIdAndUpdate(req.params.id, req.body, {new : true});
     if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
      
@@ -66,7 +68,6 @@ exports.deleta_artigo = async (req, res) => {
     let artigo = await Artigo.findById(req.params.id);
 
     if(!artigo) return res.status(404).json({msg: 'Artigo não encontrado.'});
-    if (artigo.user != req.user.id) return res.status(401).json({msg: 'Não autorizado.'});
     artigo.remove();
 
     res.json({success: true, msg: "Artigo excluido com sucesso"});

@@ -4,7 +4,7 @@ const Artigo = require('../models/Artigos');
 let server,token, _id;
 
 
-describe('Suit test', () => {
+describe('Suit test api/autores', () => {
 
     beforeAll(async () => { server = require('../app'); });    
 
@@ -107,26 +107,6 @@ describe('Suit test', () => {
         });
     });
 
-    describe('POST /artigos', function () {
-        let data = {
-            "titulo": "Titulo teste",
-            "subtitulo": "sub teste",
-            "conteudo": "conteudo teste",
-        };
-    
-        it('Deve retornar status 200', function (done) {
-            request(server)
-                .post('/api/artigos')
-                .send(data)
-                .set('Accept', 'application/json')
-                .set('Authorization', `${token}`)
-                .expect(200)
-                .end((err) => {
-                    if (err) return done(err);
-                    done();
-                });
-        });
-    });
 
     describe('GET /autores', function () {
         it('Deve retornar Json com lista de autores', function (done) {
@@ -171,13 +151,12 @@ describe('Suit test', () => {
             "senha": "testes88",
         }
 
-        it('Deve retornar status 401', function (done) {
+        it('Deve retornar status 404', function (done) {
             request(server)
                 .put('/api/autores/8883938')
                 .send(data)
                 .set('Accept', 'application/json')
-                .expect(401)
-                .expect('Unauthorized')
+                .expect(404)
                 .end((err) => {
                     if (err) return done(err);
                     done();
@@ -197,7 +176,6 @@ describe('Suit test', () => {
                 .put(url)
                 .send(data)
                 .set('Accept', 'application/json')
-                .set('Authorization', `${token}`)
                 .expect(200)
                 .end((err) => {
                     if (err) return done(err);

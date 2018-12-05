@@ -1,0 +1,85 @@
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:10:07.190Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:10:08.243Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:11:46.616Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:11:47.685Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:14:03.293Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:14:04.421Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:15:08.136Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:15:09.226Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:26:48.522Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:26:49.632Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:26:55.920Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:26:56.998Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:30:29.207Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:30:30.248Z"}
+{"message":"artigos validation failed: titulo: Path `titulo` is required., subtitulo: Path `subtitulo` is required., conteudo: Path `conteudo` is required.","errors":{"titulo":{"message":"Path `titulo` is required.","name":"ValidatorError","properties":{"message":"Path `titulo` is required.","type":"required","path":"titulo","value":""},"kind":"required","path":"titulo","value":""},"subtitulo":{"message":"Path `subtitulo` is required.","name":"ValidatorError","properties":{"message":"Path `subtitulo` is required.","type":"required","path":"subtitulo","value":""},"kind":"required","path":"subtitulo","value":""},"conteudo":{"message":"Path `conteudo` is required.","name":"ValidatorError","properties":{"message":"Path `conteudo` is required.","type":"required","path":"conteudo","value":""},"kind":"required","path":"conteudo","value":""}},"_message":"artigos validation failed","stack":"ValidationError: titulo: Path `titulo` is required., subtitulo: Path `subtitulo` is required., conteudo: Path `conteudo` is required.\n    at new ValidationError (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\error\\validation.js:30:11)\n    at model.Object.<anonymous>.Document.invalidate (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\document.js:2057:32)\n    at p.doValidate.skipSchemaValidators (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\document.js:1920:17)\n    at C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\schematype.js:874:9\n    at process._tickCallback (internal/process/next_tick.js:61:11)","name":"ValidationError","level":"error","timestamp":"2018-12-05T12:30:31.498Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:30:36.585Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:30:37.626Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:32:11.109Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-05T12:32:12.193Z"}
+{"message":"artigos validation failed: titulo: Path `titulo` is required., subtitulo: Path `subtitulo` is required., conteudo: Path `conteudo` is required.","errors":{"titulo":{"message":"Path `titulo` is required.","name":"ValidatorError","properties":{"message":"Path `titulo` is required.","type":"required","path":"titulo"},"kind":"required","path":"titulo"},"subtitulo":{"message":"Path `subtitulo` is required.","name":"ValidatorError","properties":{"message":"Path `subtitulo` is required.","type":"required","path":"subtitulo"},"kind":"required","path":"subtitulo"},"conteudo":{"message":"Path `conteudo` is required.","name":"ValidatorError","properties":{"message":"Path `conteudo` is required.","type":"required","path":"conteudo"},"kind":"required","path":"conteudo"}},"_message":"artigos validation failed","stack":"ValidationError: artigos validation failed: titulo: Path `titulo` is required., subtitulo: Path `subtitulo` is required., conteudo: Path `conteudo` is required.\n    at new ValidationError (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\error\\validation.js:30:11)\n    at model.Document.invalidate (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\document.js:2057:32)\n    at p.doValidate.skipSchemaValidators (C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\document.js:1920:17)\n    at C:\\Users\\ERICKSON\\Desktop\\desafio\\node_modules\\mongoose\\lib\\schematype.js:874:9\n    at process._tickCallback (internal/process/next_tick.js:61:11)","name":"ValidationError","level":"error","timestamp":"2018-12-05T12:34:50.581Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:38:11.766Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-05T12:38:12.823Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:43:27.004Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-05T12:43:28.064Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:45:19.592Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-05T12:45:20.702Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:45:53.322Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia","timestamp":"2018-12-05T12:45:54.363Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:46:39.120Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:46:40.171Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T12:46:50.001Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T12:46:51.136Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:00:52.457Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:00:53.599Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:01:01.246Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:01:02.275Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:04:18.794Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:04:19.832Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:04:34.159Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:04:35.391Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:05:17.819Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:05:18.898Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:05:25.269Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:05:26.376Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:07:04.041Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:07:05.105Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:07:11.804Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:07:12.910Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:09:10.097Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:09:11.219Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:09:17.957Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:09:18.994Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:10:54.197Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:10:55.260Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:11:04.567Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:11:05.610Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:13:42.705Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:13:43.849Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:13:51.944Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:13:53.012Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:15:32.820Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:15:33.938Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:15:45.064Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:15:46.126Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:16:52.779Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:16:53.849Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:17:00.596Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:17:01.670Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:19:14.497Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:19:15.588Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:19:22.316Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:19:23.373Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:20:18.124Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:20:19.229Z"}
+{"message":"Cannot read property 'id' of undefined","stack":"TypeError: Cannot read property 'id' of undefined\n    at id (C:\\Users\\ERICKSON\\Desktop\\desafio\\controllers\\artigos.js:59:32)\n    at process._tickCallback (internal/process/next_tick.js:68:7)","level":"error","timestamp":"2018-12-05T13:20:20.692Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:20:25.616Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:20:26.639Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:22:50.042Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:22:51.177Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:22:57.678Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:22:58.733Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:26:18.804Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:26:19.888Z"}
+{"level":"info","message":"Listening on port 5000...","timestamp":"2018-12-05T13:26:26.261Z"}
+{"level":"info","message":"Connected to mongodb://localhost/desafio_webedia_tests","timestamp":"2018-12-05T13:26:27.336Z"}

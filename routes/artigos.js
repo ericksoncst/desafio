@@ -15,7 +15,7 @@ router.post('/', passport.authenticate('jwt', { session: false}), criar_artigo);
 router.get('/', listar_artigos);
 router.get('/:id', artigo_by_id);
 router.get('/permalink/:permalink', artigo_by_permalink);
-router.put('/:id', passport.authenticate('jwt', { session: false}), atualiza_artigo);
-router.delete('/:id', passport.authenticate('jwt', { session: false}), deleta_artigo);
+router.put('/:id', atualiza_artigo);
+router.delete('/:id', deleta_artigo);
 
 module.exports = router; 

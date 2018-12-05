@@ -78,9 +78,6 @@ exports.atualiza_autor = async (req, res) => {
     if(verificaId(req.params.id) === false)
     return res.status(404).json({msg: 'Autor não encontrado.'});
 
-    if (req.params.id != req.user.id) 
-    return res.status(401).json({msg: 'Não autorizado.'});
-
     let autor = await Autor.findByIdAndUpdate(req.params.id, req.body, 
     {new : true}).select('_id email nome');
 
