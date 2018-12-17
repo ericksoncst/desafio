@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 class Home extends Component {
     
@@ -12,18 +13,16 @@ class Home extends Component {
 
     componentDidMount() {
 
-        fetch('http://localhost:5000/api/artigos')
-        .then(res => res.json())
-        .then(json => {
-            var x = Object.values(json);
-            console.log(x);
+        axios.get('http://localhost:5000/api/artigos')
+        .then(res => {
+            let arr = Object.values(res);
             this.setState({
                 isLoaded: true,
-                posts: x[0],
+                posts: arr[0].docs,
             });
-        });
+        })
+        .catch(err => console.log(err));
 
-        
     }
 
     render() {
