@@ -12,6 +12,7 @@
   "dependencies": {
     "bcrypt": "^3.0.2",
     "config": "^3.0.0",
+    "cors": "^2.8.5",
     "express": "^4.16.4",
     "express-async-errors": "^2.1.0",
     "jsonwebtoken": "^8.4.0",
