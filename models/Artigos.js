@@ -39,20 +39,9 @@ const ArtigoSchema = new Schema({
               required: true
           }
         }
-    ],
-    data_criacao: {
-        type: Date,
-        default: Date.now
-    },
-    data_atualizacao: {
-        type: Date,
-        default: Date.now
-    }
-});
-
-ArtigoSchema.pre('save', function(next) {
-    this.data_atualizacao = Date.now();
-    return next();
+    ]
+}, {
+    timestamps: true
 });
 
 ArtigoSchema.plugin(mongoosePaginate);

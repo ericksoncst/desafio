@@ -41,6 +41,7 @@ class Home extends Component {
                                 <p>{p.permalink}</p>
                                 <p>{p.subtitulo}</p>
                                 <p>{p.conteudo}</p>
+                                <p>{p.createdAt}</p>
                             </li>
                         ))}
                     </ul>
