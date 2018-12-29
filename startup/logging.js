@@ -13,7 +13,7 @@ module.exports = function() {
   
   winston.add(winston.transports.File, { filename: 'logfile.log' });
   winston.add(winston.transports.MongoDB, { 
-    db: 'mongodb://localhost/desafio_webedia',
+    db: 'mongodb://localhost/webedia_challenge',
     level: 'info'
   });  
 }

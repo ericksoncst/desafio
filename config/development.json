@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "blog_jwtPrivateKey",
-  "db": "mongodb://localhost/desafio_webedia"
+  "db": "mongodb://localhost/webedia_challenge"
 }

@@ -1,4 +1,4 @@
 {
   "jwtPrivateKey": "1234",
-  "db": "mongodb://localhost/desafio_webedia_tests"
+  "db": "mongodb://localhost/webedia_challenge_tests"
 }

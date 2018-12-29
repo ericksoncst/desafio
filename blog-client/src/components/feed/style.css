@@ -1,0 +1,30 @@
+.lista-feed {
+    display: inline-block;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 2px #cecece;
+    width: 400px;
+    margin: 20px;
+    padding: 20px;
+    font-family: 'Times New Roman", Times, sans-serif';
+}
+
+.titulo {
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin: 0px 5px 15px 2px;
+    font-style: bold;
+}
+
+
+.subtitulo {
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin: 0px 5px 15px 2px;
+}
+
+.author {
+    font-size: 20px;
+    font-weight: bold;
+    margin: 15px 5px 10px 2px;
+}
